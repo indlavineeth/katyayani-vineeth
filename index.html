@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#4b101c" />
+  <title>Katyayani ♥ Vineeth | Wedding Invitation</title>
+  <meta name="description" content="You are warmly invited to the wedding of Katyayani & Vineeth — Sunday, 13 December 2026 at Atluri Basavayya Kalyana Mandapam, Gudivada." />
+
+  <!-- Link preview (WhatsApp / Telegram / Facebook / iMessage) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Katyayani weds Vineeth 💍" />
+  <meta property="og:description" content="Wedding · Sun 13 Dec 2026 (Midnight)  |  Reception · Sun 13 Dec 2026, 6 PM · Gudivada. Your presence is our blessing." />
+  <meta property="og:image" content="og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Katyayani weds Vineeth — 13 December 2026" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💍%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Noto+Serif+Telugu:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="locked">
+
+  <!-- ══════════ FRONT COVER (doors) ══════════ -->
+  <div id="cover" aria-hidden="false">
+    <div class="doorway">
+      <div class="door door-left">
+        <div class="door-panel"></div><div class="door-panel"></div><div class="door-panel"></div>
+        <span class="door-ring"></span>
+      </div>
+      <div class="door door-right">
+        <div class="door-panel"></div><div class="door-panel"></div><div class="door-panel"></div>
+        <span class="door-ring"></span>
+      </div>
+      <div class="door-seam"></div>
+    </div>
+    <div class="lintel"><div class="toranam"></div></div>
+    <div class="light-burst"></div>
+  </div>
+
+  <div id="cover-card" role="dialog" aria-label="Wedding invitation cover">
+    <p class="cover-ganesha" lang="te">॥ శ్రీ గణేశాయ నమః ॥</p>
+    <div class="cover-om" aria-hidden="true">🕉️</div>
+    <p class="cover-shloka" lang="te">
+      మంగళం భగవాన్ విష్ణుః మంగళం గరుడధ్వజః<br>
+      మంగళం పుండరీకాక్షః మంగళాయతనం హరిః
+    </p>
+    <div class="cover-divider"><span></span><i>🌸</i><span></span></div>
+    <span class="gold-name">Katyayani</span>
+    <span class="cover-weds">weds</span>
+    <span class="gold-name">Vineeth</span>
+    <div class="cover-pills">
+      <div class="pill">🔥 Wedding <strong>Sun, 13 Dec (Midnight)</strong></div>
+      <div class="pill">🎶 Reception <strong>Sun, 13 Dec</strong></div>
+    </div>
+    <button id="openButton" class="open-button"><span>✦</span> Open Invitation <span>✦</span></button>
+    <span class="open-hint">Tap to open</span>
+  </div>
+
+  <!-- Music: drop a file named music.mp3 next to index.html (starts at MUSIC_START in script.js). The button only appears if it loads. -->
+  <audio id="music" preload="none" playsinline>
+    <source src="music.mp3#t=16" type="audio/mpeg">
+  </audio>
+  <button id="musicButton" class="float-button music-button" aria-label="Toggle music"><span id="musicIcon">🔊</span> <span id="musicLabel">Music On</span></button>
+  <button id="backButton" class="float-button back-button" aria-label="Back to front cover"><span>🌸</span> Front Cover</button>
+
+  <div class="petals" id="petals" aria-hidden="true"></div>
+
+  <!-- ══════════ HERO ══════════ -->
+  <header class="hero" id="home">
+    <div class="hero-photo-wrap" aria-hidden="true"><div class="hero-photo"></div></div>
+    <div class="hero-rays" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="toranam hero-toranam" aria-hidden="true"></div>
+    <div class="bell bell-left" aria-hidden="true"></div>
+    <div class="bell bell-right" aria-hidden="true"></div>
+    <div class="sparks" id="sparks" aria-hidden="true"></div>
+    <div class="hero-frame" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="eyebrow" lang="te">॥ శ్రీ వేంకటేశ్వర స్వామినే నమః ॥</p>
+      <p class="invite-line">With the blessings of Lord Venkateswara &amp; our families</p>
+      <h1><span class="gold-name">Katyayani</span><i>weds</i><span class="gold-name">Vineeth</span></h1>
+      <div class="gold-rule"><span>✦</span></div>
+      <p class="hero-sub">An auspicious &amp; sacred union</p>
+      <div class="hero-dates">
+        <div><span>Wedding</span><strong>Sunday · 13 December 2026 (Midnight)</strong></div>
+        <div><span>Reception</span><strong>Sunday · 13 December 2026 · 6 PM</strong></div>
+      </div>
+    </div>
+    <a class="scroll-cue" href="#invitation" aria-label="Scroll to invitation">Scroll<span>↓</span></a>
+  </header>
+
+  <main id="invitation">
+    <section class="blessing section reveal">
+      <div class="blessing-grid">
+        <figure class="deity reveal-child">
+          <div class="deity-aura" aria-hidden="true"></div>
+          <div class="deity-arch">
+            <img src="balaji.jpg" alt="Lord Sri Venkateswara Swamy" loading="lazy" />
+            <span class="deity-shine" aria-hidden="true"></span>
+          </div>
+          <figcaption lang="te">శ్రీ వేంకటేశ్వర స్వామి</figcaption>
+        </figure>
+        <div class="blessing-text reveal-child">
+          <p class="section-kicker">A sacred beginning</p>
+          <div class="shloka" lang="te">
+            కళ్యాణాద్భుత గాత్రాయ<br>కామితార్థ ప్రదాయినే |<br>
+            శ్రీమద్వేంకటనాథాయ<br>శ్రీనివాసాయ మంగళం ||
+          </div>
+          <p class="blessing-note">With the divine blessings of Lord Srinivasa, and together with our loved ones, we invite you to celebrate our wedding.</p>
+          <div class="small-flourish">✧ ❀ ✧</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="countdown-section section reveal">
+      <p class="section-kicker">The auspicious moment</p>
+      <h2>Counting down to forever</h2>
+      <div class="countdown" id="countdown" aria-live="off">
+        <div class="tick"><strong id="days">--</strong><span>Days</span><em lang="te">రోజులు</em></div>
+        <div class="tick"><strong id="hours">--</strong><span>Hours</span><em lang="te">గంటలు</em></div>
+        <div class="tick"><strong id="minutes">--</strong><span>Minutes</span><em lang="te">నిమిషాలు</em></div>
+        <div class="tick"><strong id="seconds">--</strong><span>Seconds</span><em lang="te">సెకన్లు</em></div>
+      </div>
+      <p class="countdown-caption" id="countdownCaption">Muhurtham · Sunday, 13 December 2026 · Night 4:01 (Early hours of Monday)</p>
+    </section>
+
+    <section class="families section reveal">
+      <p class="section-kicker">With the blessings of</p>
+      <h2>Our Families</h2>
+      <div class="family-grid">
+        <article class="family-card reveal-child">
+          <div class="family-symbol">❀</div>
+          <p class="family-label">Bride</p>
+          <h3>Katyayani</h3>
+          <div class="family-line"></div>
+          <p>Kondeti Madhu Babu</p>
+          <p>Kondeti Padma</p>
+          <p>Kondeti Kowsik</p>
+        </article>
+        <article class="family-card reveal-child">
+          <div class="family-symbol">❀</div>
+          <p class="family-label">Groom</p>
+          <h3>Vineeth</h3>
+          <div class="family-line"></div>
+          <p>Indla Sreenivasa Babu Rao</p>
+          <p>Indla Lakshmi Devi</p>
+          <p>Indla Shirishma Bhavana</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="events section reveal">
+      <p class="section-kicker">Please join us</p>
+      <h2>Wedding Celebrations</h2>
+      <div class="event-grid">
+        <article class="event-card reveal-child">
+          <div class="event-banner">
+            <div class="event-icon">🔥</div>
+            <p class="event-label">The Wedding</p>
+          </div>
+          <div class="event-body">
+            <h3>Sunday, 13 December 2026</h3>
+            <p class="event-time">Night 4:01</p>
+            <p class="event-note">(Early hours of Monday) · Thula Lagnam</p>
+            <div class="event-divider"></div>
+            <h4>Atluri Basavayya Kalyana Mandapam</h4>
+            <p>Beside Satya Electronics Lane, Near Bus Stand,<br>Satyanarayanapuram, Gudivada</p>
+            <a class="map-link" href="https://maps.app.goo.gl/zDk4GS7hAmuBKZma9" target="_blank" rel="noopener">Get Directions ↗</a>
+          </div>
+          <div class="card-shimmer" aria-hidden="true"></div>
+        </article>
+        <article class="event-card reveal-child">
+          <div class="event-banner">
+            <div class="event-icon">🎶</div>
+            <p class="event-label">The Reception</p>
+          </div>
+          <div class="event-body">
+            <h3>Sunday, 13 December 2026</h3>
+            <p class="event-time">6:00 PM</p>
+            <p class="event-note">Onwards · Dinner at the venue</p>
+            <div class="event-divider"></div>
+            <h4>Atluri Basavayya Kalyana Mandapam</h4>
+            <p>Beside Satya Electronics Lane, Near Bus Stand,<br>Satyanarayanapuram, Gudivada</p>
+            <a class="map-link" href="https://maps.app.goo.gl/zDk4GS7hAmuBKZma9" target="_blank" rel="noopener">Get Directions ↗</a>
+          </div>
+          <div class="card-shimmer" aria-hidden="true"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing section reveal">
+      <div class="closing-photo" aria-hidden="true"></div>
+      <div class="diyas" aria-hidden="true">
+        <span class="diya"><i></i></span><span class="diya"><i></i></span><span class="diya"><i></i></span><span class="diya"><i></i></span><span class="diya"><i></i></span>
+      </div>
+      <p class="section-kicker">Your presence is our blessing</p>
+      <h2>We look forward to<br>celebrating with you</h2>
+      <p class="closing-names">Katyayani <span>&amp;</span> Vineeth</p>
+      <p class="closing-date">13 · DECEMBER · 2026</p>
+      <p class="closing-invited">Invited by<br><strong>Sri Kondeti Madhu Babu &amp; Smt. Kondeti Padma</strong></p>
+      <div class="share-row">
+        <a class="share-button whatsapp" id="whatsappButton" href="#" target="_blank" rel="noopener">Share on WhatsApp</a>
+        <button class="share-button" id="shareButton">Share Invitation ↗</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><span>Made with love</span><span class="footer-heart">♥</span><span>Katyayani &amp; Vineeth · 2026</span></p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

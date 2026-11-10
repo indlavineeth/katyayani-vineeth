@@ -15,7 +15,7 @@ A responsive, static wedding invitation website ready to deploy on Vercel.
 - Countdown to the muhurtham (13 Dec night = 14 Dec 2026, 4:01 AM IST), with English and Telugu labels
 - Google Maps directions to the venue (on both cards)
 - "Share on WhatsApp" button and native share (both include the page link)
-- Link preview image (`og-image.jpg`) for WhatsApp and other apps
+- Link preview image (`og-preview.jpg`) for WhatsApp and other apps
 - Respects "reduce motion" settings on phones and computers
 
 ## Photo sources
@@ -38,8 +38,8 @@ You can also deploy with Vercel CLI from this folder using `vercel` and follow t
 
 ## After the first deploy
 - **WhatsApp preview:** WhatsApp needs the full image address. In `index.html`, change
-  `<meta property="og:image" content="og-image.jpg" />` to
-  `<meta property="og:image" content="https://YOUR-SITE.vercel.app/og-image.jpg" />`
+  `<meta property="og:image" content="og-preview.jpg" />` to
+  `<meta property="og:image" content="https://YOUR-SITE.vercel.app/og-preview.jpg" />`
   and add `<meta property="og:url" content="https://YOUR-SITE.vercel.app/" />`, then redeploy.
 
 ## Optional

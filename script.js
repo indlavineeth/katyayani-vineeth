@@ -2,7 +2,7 @@ const $ = id => document.getElementById(id);
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ── Front cover: doors open / close ── */
-const MUSIC_START = 16; // seconds into the song where playback begins (and where it loops back to)
+const MUSIC_START = 2; // seconds into the song where playback begins (and where it loops back to)
 const audio = $("music");
 audio.addEventListener("ended", () => {
   audio.currentTime = MUSIC_START;

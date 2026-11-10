@@ -43,7 +43,7 @@ You can also deploy with Vercel CLI from this folder using `vercel` and follow t
   and add `<meta property="og:url" content="https://YOUR-SITE.vercel.app/" />`, then redeploy.
 
 ## Optional
-- **Music ("Kaanunna Kalyanam", Sita Ramam):** `music.mp3` is included. It starts at 0:16 when guests tap "Open Invitation", loops back to 0:16 at the end, and a Music On/Off button appears. To change the start point, edit `MUSIC_START` at the top of `script.js`. Without the file, no music button is shown.
+- **Music:** `music.m4a` is included (audio taken from the 31-second WhatsApp video). It starts at 0:02 when guests tap "Open Invitation", loops back to 0:02 at the end, and a Music On/Off button appears. To change the start point, edit `MUSIC_START` at the top of `script.js`. Without the file, no music button is shown.
 
 ## 40-day hosting
 Vercel does not automatically expire a deployment after 40 days. Set a reminder to remove the deployment/project after the invitation period.

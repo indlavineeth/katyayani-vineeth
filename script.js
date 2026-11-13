@@ -33,10 +33,11 @@ function openInvitation() {
   $("cover-card").classList.add("hide");
   setTimeout(() => $("cover").classList.add("open"), 250);
   setTimeout(() => document.body.classList.add("opened"), reducedMotion ? 0 : 600);
+  const phone = window.innerWidth <= 700;
   setTimeout(() => {
     if (reducedMotion) return;
-    for (let i = 0; i < 28; i++) spawnPetal(true);
-  }, 1200);
+    for (let i = 0; i < (phone ? 14 : 28); i++) spawnPetal(true);
+  }, phone ? 2600 : 1200);
   setTimeout(() => {
     $("cover").classList.add("gone");
     $("cover-card").classList.add("gone");
@@ -72,8 +73,8 @@ $("openButton").addEventListener("click", openInvitation);
 $("cover").addEventListener("click", openInvitation);
 $("cover-card").addEventListener("click", openInvitation);
 
-/* ── Nudges: doors "knock" if nobody taps; a gentle peek shows there is more below ── */
-let knockTimer = null, peekTimer = null;
+/* ── Nudge: the doors "knock" if nobody taps ── */
+let knockTimer = null;
 function startKnocking() {
   if (reducedMotion) return;
   stopKnocking();
@@ -89,15 +90,87 @@ function stopKnocking() {
   knockTimer = null;
   $("cover").classList.remove("knock");
 }
-/* ── Guided tour: 8 s after opening a small peek, 15 s glide to the 2nd section,
+/* ── Guided tour: the same smooth slide-to-slide scroll for every slide (no peek): 15 s on the first screen,
       then every 13 s on to the next section. Touching or scrolling pauses it;
       it carries on from where the guest is after 13 s without touching. ── */
-const TOUR = { peekAt: 8000, firstAt: 15000, every: 13000, countdown: 6000 }; // countdown has little to read
-let tourTimer = null, lastTouch = 0, peeked = false, peekingUntil = 0;
+const TOUR = { firstAt: 15000, every: 13000, countdown: 6000 }; // countdown has little to read
+let tourTimer = null, lastTouch = 0;
 ["touchstart", "wheel", "keydown", "mousedown"].forEach(ev => addEventListener(ev, () => { lastTouch = Date.now(); }, { passive: true }));
 
 // Real page position (offsetTop ignores the 30px fade-in shift of sections not shown yet)
 const pageTop = el => { let t = 0; for (; el; el = el.offsetParent) t += el.offsetTop; return t; };
+
+/* ── Phones: each part of the page is one full-screen "slide": the content is centred in the
+      space above the bottom bar, and Wedding / Reception are separate slides. Laptop is unchanged. ── */
+const isPhone = () => window.innerWidth <= 700;
+let phoneStops = null;
+
+function layoutSlides() {
+  const sections = [...document.querySelectorAll("main > section")];
+  const events = $("events"), cards = events.querySelectorAll(".event-card");
+  const hero = document.querySelector(".hero-inner");
+  [...sections, hero].forEach(el => { el.style.paddingTop = el.style.paddingBottom = el.style.zoom = ""; });
+  events.querySelector(".event-grid").style.rowGap = "";
+  phoneStops = null;
+  laidOutW = window.innerWidth; laidOutH = window.innerHeight;
+  if (!isPhone()) return;
+
+  const H = window.innerHeight, avail = H - 84;            // keep clear of the bottom bar
+  const fit = h => Math.max(14, Math.floor((avail - h) / 2));
+  // A slightly smaller phone: shrink that slide's content just enough to fit (never below 80%)
+  const shrink = (h, room) => Math.max(0.8, Math.min(1, room / h));
+  const stops = [];
+
+  // Top screen: names + dates must fit above the scroll hint
+  const heroRoom = H - 84 - 170, heroH = hero.offsetHeight;
+  if (heroH > heroRoom) hero.style.zoom = shrink(heroH, heroRoom);
+  if (hero.offsetHeight * (+hero.style.zoom || 1) > heroRoom) hero.style.zoom = shrink(hero.offsetHeight, heroRoom);
+
+  sections.forEach(sec => {
+    if (sec === events) return;
+    const cs = getComputedStyle(sec);
+    const natural = sec.scrollHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    const z = shrink(natural, avail - 20);
+    if (z < 1) sec.style.zoom = z;
+    // re-measure after shrinking: text wraps differently at the smaller size
+    const content = (sec.scrollHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)) * z;
+    const top = fit(content);
+    // the footer sits under the last slide, so it shares that screen
+    const extra = sec === sections[sections.length - 1] ? document.querySelector("footer").offsetHeight : 0;
+    sec.style.paddingTop = top / z + "px";
+    sec.style.paddingBottom = Math.max(14, H - content - top - extra) / z + "px";
+  });
+  // Events: heading + wedding card = one slide, reception card = the next slide
+  const kicker = events.querySelector(".section-kicker");
+  const firstN = pageTop(cards[0]) + cards[0].offsetHeight - pageTop(kicker), secondN = cards[1].offsetHeight;
+  const ze = Math.min(shrink(firstN, avail - 20), shrink(secondN, avail - 20));
+  if (ze < 1) events.style.zoom = ze;
+  const firstH = (pageTop(cards[0]) + cards[0].offsetHeight - pageTop(kicker)) * ze, secondH = cards[1].offsetHeight * ze;
+  const topA = fit(firstH), topB = fit(secondH);
+  events.style.paddingTop = topA / ze + "px";
+  events.querySelector(".event-grid").style.rowGap = Math.max(14, H - topA - firstH + topB) / ze + "px";
+  events.style.paddingBottom = Math.max(14, H - topB - secondH) / ze + "px";
+
+  // Every slide is exactly one screen tall (events = two), so the stops are one screen apart
+  const start = pageTop(sections[0]);
+  const count = sections.length + 1;
+  for (let i = 0; i < count; i++) stops.push(start + i * H);
+  phoneStops = stops;
+}
+function slideStops() {
+  return phoneStops || [...document.querySelectorAll("main > section")].map(pageTop);
+}
+let layoutTimer = null, laidOutW = 0, laidOutH = 0;
+// Phone address bars hide/show while scrolling and change the height a little: ignore that,
+// re-measure only on a real change (rotation, window resize), so the page never jumps mid-scroll.
+const relayout = () => {
+  if (window.innerWidth === laidOutW && Math.abs(window.innerHeight - laidOutH) < 120) return;
+  clearTimeout(layoutTimer); layoutTimer = setTimeout(layoutSlides, 150);
+};
+addEventListener("resize", relayout);
+addEventListener("load", layoutSlides);
+document.fonts && document.fonts.ready.then(layoutSlides);
+layoutSlides();
 
 // How long to stay on the section currently at the top of the screen
 function tourWait() {
@@ -108,8 +181,8 @@ function tourWait() {
 
 function nextTourStop() {
   const y = window.scrollY, bottom = document.documentElement.scrollHeight - window.innerHeight;
-  if (y >= bottom - 5) return null;
-  const nextTop = [...document.querySelectorAll("main > section")].map(pageTop).find(top => top > y + 20) ?? bottom;
+  if (y >= bottom - 60) return null;          // already (almost) at the end: no tiny last nudge
+  const nextTop = slideStops().find(top => top > y + 20) ?? bottom;
   // Every stop shows one section from its top. A section taller than the screen gets one extra
   // stop that shows the rest of it, ending exactly where the next section begins (never half of the next one).
   let target = nextTop;
@@ -123,25 +196,12 @@ function nextTourStop() {
 function startTour() {
   clearInterval(tourTimer);
   if (reducedMotion) return;
-  lastTouch = Date.now(); peeked = false;
+  lastTouch = Date.now();
   tourTimer = setInterval(() => {
     const chooser = $("mapChooser"); // pause while the location chooser is open
     if (!isOpen || document.hidden || (chooser && !chooser.hidden)) return;
-    if (Date.now() < peekingUntil) return;          // the peek is still going down and back
     const idle = Date.now() - lastTouch;
-    if (window.scrollY < 40) {                       // still on the first screen
-      if (!peeked && idle >= TOUR.peekAt) {
-        peeked = true;
-        peekingUntil = Date.now() + 2800;
-        window.scrollTo({ top: Math.min(260, window.innerHeight * 0.35), behavior: "smooth" });
-        setTimeout(() => { if (Date.now() - lastTouch >= 1300) window.scrollTo({ top: 0, behavior: "smooth" }); }, 1300);
-      } else if (idle >= TOUR.firstAt) {
-        $("invitation").scrollIntoView({ behavior: "smooth", block: "start" });
-        lastTouch = Date.now();
-      }
-      return;
-    }
-    if (idle >= tourWait()) {
+    if (idle >= (window.scrollY < 40 ? TOUR.firstAt : tourWait())) {
       const to = nextTourStop();
       if (to === null) { clearInterval(tourTimer); return; }   // reached the end
       window.scrollTo({ top: to, behavior: "smooth" });
@@ -204,8 +264,8 @@ function spawnSpark() {
 
 function startParticles() {
   if (reducedMotion || petalTimer) return;
-  const petalEvery = window.innerWidth < 700 ? 900 : 600;
-  for (let i = 0; i < 16; i++) spawnPetal();
+  const petalEvery = window.innerWidth < 700 ? 1800 : 600;
+  for (let i = 0; i < (window.innerWidth < 700 ? 6 : 16); i++) spawnPetal();
   for (let i = 0; i < 25; i++) spawnSpark();
   petalTimer = setInterval(spawnPetal, petalEvery);
   sparkTimer = setInterval(spawnSpark, 500);
@@ -276,7 +336,7 @@ const observer = new IntersectionObserver(entries => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.12, rootMargin: "0px 0px 35% 0px" }); // show each part a little before it scrolls in
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
 /* ── Card hover glow (desktop) ── */

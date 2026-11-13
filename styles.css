@@ -3,12 +3,12 @@
   --mandala:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%23e8cf91' stroke-width='1'%3E%3Ccircle cx='80' cy='80' r='28'/%3E%3Ccircle cx='80' cy='80' r='44'/%3E%3Cpath d='M80 36c10 14 10 30 0 44-10-14-10-30 0-44zM80 124c10-14 10-30 0-44-10 14-10 30 0 44zM36 80c14-10 30-10 44 0-14 10-30 10-44 0zM124 80c-14-10-30-10-44 0 14 10 30 10 44 0z'/%3E%3Cpath d='M49 49c17 2 29 14 31 31-17-2-29-14-31-31zM111 111c-17-2-29-14-31-31 17 2 29 14 31 31zM111 49c-2 17-14 29-31 31 2-17 14-29 31-31zM49 111c2-17 14-29 31-31-2 17-14 29-31 31z'/%3E%3Ccircle cx='0' cy='0' r='10'/%3E%3Ccircle cx='160' cy='0' r='10'/%3E%3Ccircle cx='0' cy='160' r='10'/%3E%3Ccircle cx='160' cy='160' r='10'/%3E%3C/g%3E%3C/svg%3E")}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--cream);color:var(--ink);font-family:"Cormorant Garamond",serif;overflow-x:hidden}
-body.locked{overflow:hidden;height:100svh}
+body.locked{overflow:hidden}
 
 /* ── Front cover: two doors + floating card ── */
 #cover{position:fixed;inset:0;z-index:1000;overflow:hidden;background:#1a0604}
 #cover.open{background:transparent;transition:background .6s ease .4s}
-#cover.gone{display:none}
+#cover.gone{visibility:hidden;pointer-events:none}
 /* Doors swing inward in 3D; the whole doorway moves toward the viewer as if walking in */
 .doorway{position:absolute;inset:0;display:flex;perspective:1400px;transition:transform 2.4s cubic-bezier(.55,0,.25,1),opacity 1s ease 1.6s}
 #cover.open .doorway{transform:scale(1.35);opacity:0}
@@ -43,7 +43,7 @@ body.locked{overflow:hidden;height:100svh}
 
 #cover-card{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1010;width:min(600px,92vw);max-height:94svh;overflow:auto;text-align:center;padding:30px 24px 28px;border-radius:20px;border:1px solid rgba(232,207,145,.35);background:radial-gradient(ellipse 95% 85% at 50% 50%,rgba(26,4,9,.86) 0%,rgba(20,3,7,.7) 70%,rgba(12,2,4,.5) 100%);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);box-shadow:0 15px 50px rgba(0,0,0,.7),0 0 30px rgba(198,154,75,.18);color:#f9edcf;transition:opacity .7s ease,transform .7s ease;animation:cardIn 1.2s ease backwards}
 #cover-card.hide{opacity:0;transform:translate(-50%,-44%) scale(.96);pointer-events:none}
-#cover-card.gone{display:none}
+#cover-card.gone{visibility:hidden;pointer-events:none}
 .cover-ganesha{font:500 13px "Noto Serif Telugu",serif;letter-spacing:2px;color:var(--gold-light);margin:0 0 6px}
 .cover-om{font-size:52px;line-height:1.1;animation:divineGlow 2.5s ease-in-out infinite}
 .cover-shloka{font:400 14px/2 "Noto Serif Telugu",serif;color:var(--gold-light);opacity:.9;margin:8px 0 6px}
@@ -316,3 +316,48 @@ footer p{display:flex;justify-content:center;gap:10px;align-items:center;flex-wr
   .scroll-cue .cue-text{font-size:11px;letter-spacing:1.5px}
   .scroll-cue .cue-te{font-size:11px}
 }
+
+/* ── Phones: compact layout so every section fits one screen (the script sizes each "slide") ── */
+@media(max-width:700px){
+  main > .section{padding-left:16px;padding-right:16px}
+  .section h2{font-size:30px;margin:0 0 16px}
+  .section-kicker{margin:0 0 6px}
+  /* Venkateswara + shloka on one screen */
+  .blessing-grid{gap:14px}
+  .deity{width:min(190px,50vw)}
+  .deity-arch{outline-offset:4px}
+  .deity figcaption{margin-top:14px;font-size:16px}
+  .blessing-text{padding-top:18px}
+  .blessing-text .shloka{font-size:17px;line-height:1.7;margin:8px auto 10px}
+  .blessing-note{font-size:17px;line-height:1.35;margin:0}
+  .small-flourish{margin-top:10px;font-size:18px}
+  /* Both families on one screen */
+  .family-grid{gap:12px}
+  .family-card{padding:16px 14px}
+  .family-symbol{font-size:20px}
+  .family-label{margin:4px 0}
+  .family-card h3{font-size:28px;margin:0 0 6px}
+  .family-line{margin:8px auto}
+  .family-card p:not(.family-label){font-size:18px;margin:3px 0}
+  /* Countdown: all four boxes in one row on every phone */
+  .countdown{flex-wrap:nowrap;gap:8px}
+  .tick{min-width:0;flex:1;max-width:84px}
+  /* One event card per screen */
+  .event-body{padding:14px 16px 18px}
+  .event-body h3{margin-top:0}
+  .event-divider{margin:10px auto}
+  /* Smoother door opening and scrolling on phones: no per-flower glow, no live blur behind buttons */
+  .petal{filter:none!important}
+  /* slides are already shown when they arrive (no washed-out look mid-scroll) */
+  .reveal,.reveal .reveal-child{transition-duration:.45s!important}
+  .float-button,.quick-bar,.scroll-cue,#cover-card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .quick-bar,.float-button{background:rgba(42,7,16,.94)}
+  .door,.doorway{will-change:transform,opacity}
+  .door{box-shadow:none}
+  #cover.open .door-seam{display:none}
+  /* Heaviest effects for phone graphics chips: darkening filter on the swinging doors, shine over the deity photo */
+  .door{transition:transform 1.8s cubic-bezier(.6,0,.2,1) .2s!important}
+  #cover.open .door-left,#cover.open .door-right{filter:none!important}
+  .deity-shine{display:none}
+}
+

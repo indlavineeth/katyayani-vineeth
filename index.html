@@ -26,6 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Noto+Serif+Telugu:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body class="locked">
 
@@ -58,11 +59,11 @@
     <span class="cover-weds">weds</span>
     <span class="gold-name">Vineeth</span>
     <div class="cover-pills">
-      <div class="pill">🔥 Wedding <strong>Sun, 13 Dec (Midnight)</strong></div>
-      <div class="pill">🎶 Reception <strong>Sun, 13 Dec</strong></div>
+      <div class="pill"><img class="mini-agni" src="agni.jpg" alt="" /> Wedding <strong>Sun, 13 Dec (Midnight)</strong></div>
+      <div class="pill">💐 Reception <strong>Sun, 13 Dec</strong></div>
     </div>
     <button id="openButton" class="open-button"><span>✦</span> Open Invitation <span>✦</span></button>
-    <span class="open-hint">Tap to open</span>
+    <span class="open-hint"><span class="tap-hand" aria-hidden="true">👆</span><span class="hint-te" lang="te">ఆహ్వానం తెరవడానికి నొక్కండి</span><span class="hint-en">Tap to open your invitation</span></span>
   </div>
 
   <!-- Music: drop a file named music.m4a next to index.html (starts at MUSIC_START in script.js). The button only appears if it loads. -->
@@ -95,7 +96,7 @@
         <div><span>Reception</span><strong>Sunday · 13 December 2026 · 6 PM</strong></div>
       </div>
     </div>
-    <a class="scroll-cue" href="#invitation" aria-label="Scroll to invitation">Scroll<span>↓</span></a>
+    <a class="scroll-cue" href="#invitation" aria-label="Scroll down for details"><span class="cue-te" lang="te">వివరాల కోసం కిందికి జరపండి</span><span class="cue-text">Scroll down for details</span><span class="chev" aria-hidden="true"><i></i><i></i></span></a>
   </header>
 
   <main id="invitation">
@@ -121,9 +122,9 @@
       </div>
     </section>
 
-    <section class="countdown-section section reveal">
-      <p class="section-kicker">The auspicious moment</p>
-      <h2>Counting down to forever</h2>
+    <section class="countdown-section section reveal" id="countdownSection">
+      <p class="section-kicker" id="countdownKicker">The auspicious moment</p>
+      <h2 id="countdownTitle">Counting down to forever</h2>
       <div class="countdown" id="countdown" aria-live="off">
         <div class="tick"><strong id="days">--</strong><span>Days</span><em lang="te">రోజులు</em></div>
         <div class="tick"><strong id="hours">--</strong><span>Hours</span><em lang="te">గంటలు</em></div>
@@ -158,13 +159,13 @@
       </div>
     </section>
 
-    <section class="events section reveal">
-      <p class="section-kicker">Please join us</p>
+    <section class="events section reveal" id="events">
+      <p class="section-kicker" id="eventsKicker">Please join us</p>
       <h2>Wedding Celebrations</h2>
       <div class="event-grid">
         <article class="event-card reveal-child">
           <div class="event-banner">
-            <div class="event-icon">🔥</div>
+            <div class="event-icon agni"><img src="agni.jpg" alt="Sacred fire (Agni)" loading="lazy" /></div>
             <p class="event-label">The Wedding</p>
           </div>
           <div class="event-body">
@@ -173,14 +174,14 @@
             <p class="event-note">(Early hours of Monday) · Thula Lagnam</p>
             <div class="event-divider"></div>
             <h4>Atluri Basavayya Kalyana Mandapam</h4>
-            <p>Beside Satya Electronics Lane, Near Bus Stand,<br>Satyanarayanapuram, Gudivada</p>
+            <p>Beside Satya Electronics Lane, Near Bus Stand, Satyanarayanapuram, Gudivada</p>
             <a class="map-link" href="https://maps.app.goo.gl/zDk4GS7hAmuBKZma9" target="_blank" rel="noopener">Get Directions ↗</a>
           </div>
           <div class="card-shimmer" aria-hidden="true"></div>
         </article>
         <article class="event-card reveal-child">
           <div class="event-banner">
-            <div class="event-icon">🎶</div>
+            <div class="event-icon ring"><span>💐</span></div>
             <p class="event-label">The Reception</p>
           </div>
           <div class="event-body">
@@ -189,7 +190,7 @@
             <p class="event-note">Onwards · Dinner at the venue</p>
             <div class="event-divider"></div>
             <h4>Atluri Basavayya Kalyana Mandapam</h4>
-            <p>Beside Satya Electronics Lane, Near Bus Stand,<br>Satyanarayanapuram, Gudivada</p>
+            <p>Beside Satya Electronics Lane, Near Bus Stand, Satyanarayanapuram, Gudivada</p>
             <a class="map-link" href="https://maps.app.goo.gl/zDk4GS7hAmuBKZma9" target="_blank" rel="noopener">Get Directions ↗</a>
           </div>
           <div class="card-shimmer" aria-hidden="true"></div>
@@ -197,22 +198,28 @@
       </div>
     </section>
 
-    <section class="closing section reveal">
+    <section class="closing section reveal" id="share">
       <div class="closing-photo" aria-hidden="true"></div>
       <div class="diyas" aria-hidden="true">
         <span class="diya"><i></i></span><span class="diya"><i></i></span><span class="diya"><i></i></span><span class="diya"><i></i></span><span class="diya"><i></i></span>
       </div>
-      <p class="section-kicker">Your presence is our blessing</p>
-      <h2>We look forward to<br>celebrating with you</h2>
+      <p class="section-kicker" id="closingKicker">Your presence is our blessing</p>
+      <h2 id="closingTitle">We look forward to<br>celebrating with you</h2>
       <p class="closing-names">Katyayani <span>&amp;</span> Vineeth</p>
       <p class="closing-date">13 · DECEMBER · 2026</p>
-      <p class="closing-invited">Invited by<br><strong>Sri Kondeti Madhu Babu &amp; Smt. Kondeti Padma</strong></p>
+      <p class="closing-invited">Invited by<br><strong>Sri Kondeti Madhu Babu &amp;<br>Smt. Kondeti Padma</strong><br><strong>Kondeti Kowsik</strong></p>
       <div class="share-row">
         <a class="share-button whatsapp" id="whatsappButton" href="#" target="_blank" rel="noopener">Share on WhatsApp</a>
         <button class="share-button" id="shareButton">Share Invitation ↗</button>
       </div>
     </section>
   </main>
+
+  <nav class="quick-bar" id="quickBar" aria-label="Quick links">
+    <a href="#events" data-jump="events">📅 Dates &amp; Venue</a>
+    <a href="https://maps.app.goo.gl/zDk4GS7hAmuBKZma9" target="_blank" rel="noopener">📍 Map</a>
+    <a href="#share" data-jump="share">💬 Share</a>
+  </nav>
 
   <footer>
     <p><span>Made with love</span><span class="footer-heart">♥</span><span>Katyayani &amp; Vineeth · 2026</span></p>

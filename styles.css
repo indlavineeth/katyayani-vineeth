@@ -58,7 +58,22 @@ body.locked{overflow:hidden;height:100svh}
 .pill strong{color:var(--gold-light);margin-left:4px}
 .open-button{display:inline-flex;align-items:center;gap:10px;border:0;cursor:pointer;border-radius:50px;padding:14px 32px;font:700 14px "Cinzel Decorative",serif;letter-spacing:1.5px;color:var(--wine-dark);background:linear-gradient(135deg,var(--gold-dark),var(--gold),var(--gold-bright),var(--gold),var(--gold-dark));background-size:300% 100%;animation:btnShimmer 2.5s linear infinite,btnPulse 1.8s ease-in-out infinite;transition:transform .2s}
 .open-button:hover{transform:scale(1.06)}
-.open-hint{display:block;margin-top:12px;font:11px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);opacity:.7}
+/* Cover hints: tapping hand, ripple ring, bilingual line */
+.open-button{position:relative}
+.open-button:after{content:"";position:absolute;inset:-6px;border-radius:60px;border:2px solid var(--gold-bright);animation:ring 1.8s ease-out infinite;pointer-events:none}
+.open-hint{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:10px;color:var(--gold-light)}
+.tap-hand{font-size:34px;line-height:1;animation:tapHand 1.4s ease-in-out infinite;filter:drop-shadow(0 3px 6px rgba(0,0,0,.4))}
+.hint-te{font:500 15px "Noto Serif Telugu",serif}
+.hint-en{font:11px Arial,sans-serif;letter-spacing:2.5px;text-transform:uppercase;opacity:.85}
+#cover,#cover-card{cursor:pointer}
+#cover.knock .door-left{animation:knockL .9s ease-in-out}
+#cover.knock .door-right{animation:knockR .9s ease-in-out}
+#cover.knock .door-seam{animation:seamFlash .9s ease-in-out}
+@keyframes ring{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.28)}}
+@keyframes tapHand{0%,100%{transform:translateY(10px)}50%{transform:translateY(-6px) scale(.92)}}
+@keyframes knockL{0%,100%{transform:none}30%{transform:rotateY(-8deg)}60%{transform:rotateY(-3deg)}}
+@keyframes knockR{0%,100%{transform:none}30%{transform:rotateY(8deg)}60%{transform:rotateY(3deg)}}
+@keyframes seamFlash{50%{box-shadow:0 0 50px 20px rgba(255,214,110,.95)}}
 
 /* ── Floating buttons ── */
 .float-button{position:fixed;z-index:60;bottom:18px;display:none;align-items:center;gap:6px;padding:9px 15px;border-radius:40px;cursor:pointer;border:1px solid rgba(198,154,75,.7);background:rgba(42,7,16,.8);color:var(--gold-light);font:12px Arial,sans-serif;letter-spacing:.5px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 6px 20px rgba(0,0,0,.25);transition:transform .2s,background .2s}
@@ -112,8 +127,22 @@ h1 i{font:400 clamp(34px,6vw,54px) "Great Vibes",cursive;color:var(--gold-light)
 .hero-dates span{font:10px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
 .hero-dates strong{font:500 13px Arial,sans-serif;letter-spacing:1.5px;color:#f8e8c6;text-transform:uppercase}
 .scroll-cue{position:absolute;bottom:42px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--gold-light);text-decoration:none;font:10px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;animation:bounce 2s ease-in-out infinite}
-.scroll-cue span{font-size:18px}
+.scroll-cue{position:fixed;bottom:74px;z-index:60;transition:opacity .4s;gap:4px;padding:8px 16px 6px;border-radius:30px;background:rgba(42,7,16,.55);border:1px solid rgba(232,207,145,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.scroll-cue .cue-text{font:700 13px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;white-space:nowrap}
+.scroll-cue .cue-te{font:500 13px "Noto Serif Telugu",serif;letter-spacing:0;text-transform:none;white-space:nowrap}
+.chev{display:flex;flex-direction:column;align-items:center;height:26px}
+.chev i{display:block;width:14px;height:14px;margin-top:-6px;border-right:3px solid var(--gold-bright);border-bottom:3px solid var(--gold-bright);transform:rotate(45deg);animation:chev 1.4s ease-in-out infinite}
+.chev i:nth-child(2){animation-delay:.2s}
+@keyframes chev{0%,100%{opacity:.25}50%{opacity:1}}
 
+/* Quick links bar (after the doors open) */
+.quick-bar{position:fixed;left:50%;bottom:14px;z-index:61;display:flex;gap:2px;padding:5px;border-radius:40px;background:rgba(42,7,16,.9);border:1px solid rgba(198,154,75,.75);box-shadow:0 8px 26px rgba(0,0,0,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transform:translate(-50%,160%);transition:transform .5s cubic-bezier(.2,1.2,.4,1)}
+.quick-bar.visible{transform:translate(-50%,0)}
+.quick-bar a{display:flex;align-items:center;padding:10px 13px;border-radius:30px;color:var(--gold-light);text-decoration:none;font:600 13px Arial,sans-serif;white-space:nowrap}
+.quick-bar a:hover,.quick-bar a:active{background:rgba(198,154,75,.25)}
+.float-button{bottom:76px}
+.hero{padding-top:80px;padding-bottom:200px}
+body:not(.opened) .scroll-cue,body.scrolled .scroll-cue{opacity:0;pointer-events:none}
 /* ── Sections ── */
 .section{padding:90px 22px;text-align:center;position:relative}
 .section-kicker{font:11px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;color:#a77b37;margin:0 0 13px}
@@ -191,7 +220,7 @@ h2{font:500 clamp(34px,5vw,52px) "Playfair Display",serif;color:var(--wine);marg
 .share-button:hover{background:var(--gold);color:var(--wine)}
 .share-button.whatsapp{background:#1f8f4e;border-color:#1f8f4e;color:#fff}
 .share-button.whatsapp:hover{background:#25d366;border-color:#25d366;color:#0b2e17}
-footer{padding:22px 22px 80px;background:#2a0710;color:#d9c39b;font:10px Arial,sans-serif;letter-spacing:1px;text-align:center}
+footer{padding:22px 22px 110px;background:#2a0710;color:#d9c39b;font:10px Arial,sans-serif;letter-spacing:1px;text-align:center}
 footer p{display:flex;justify-content:center;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 8px}
 .footer-heart{color:#d7a64d;animation:heartbeat 1.6s ease-in-out infinite}
 
@@ -257,3 +286,33 @@ footer p{display:flex;justify-content:center;gap:10px;align-items:center;flex-wr
 }
 .closing-invited{font:13px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#e5d1aa;margin:-14px 0 30px;line-height:1.9}
 .closing-invited strong{font:500 clamp(17px,3vw,21px) "Playfair Display",serif;letter-spacing:.5px;text-transform:none;color:var(--gold-light)}
+
+
+/* Agni (sacred fire) icon on the wedding card */
+.event-icon.agni{width:76px;height:76px;margin:0 auto;border-radius:50%;overflow:hidden;border:3px solid var(--gold);box-shadow:0 0 0 3px rgba(42,7,16,.6),0 0 22px rgba(255,170,60,.75)}
+.event-icon.agni img{display:block;width:100%;height:100%;object-fit:cover}
+/* Reception icon in the same round frame, so both card banners are the same height */
+.event-icon.ring{width:76px;height:76px;margin:0 auto;border-radius:50%;display:grid;place-items:center;border:3px solid var(--gold);background:radial-gradient(circle,#6b1b2b,#2a0710);box-shadow:0 0 0 3px rgba(42,7,16,.6),0 0 22px rgba(232,207,145,.45)}
+.event-icon.ring span{font-size:34px;line-height:1}
+.mini-agni{width:20px;height:20px;border-radius:50%;vertical-align:-5px;margin-right:2px;box-shadow:0 0 6px rgba(255,170,60,.7)}
+.mini-agni.big{width:32px;height:32px;vertical-align:middle;margin:0}
+/* After the muhurtham the countdown boxes are hidden; the caption carries the married note */
+.countdown-section.married .countdown{display:none}
+.countdown-section.married .countdown-caption{font-size:20px;color:#6b1b2b;margin-top:6px}
+/* Phone layout for the hints (kept last so it wins over the earlier mobile rules) */
+@media(max-width:700px){
+  .hero{padding:84px 14px 180px}
+  .hero-dates{flex-wrap:nowrap;gap:8px}
+  .hero-dates div{flex:1;width:auto;padding:10px 8px}
+  .hero-dates strong{font-size:13px;letter-spacing:.5px;line-height:1.4}
+  /* Bigger small labels on phones, easier for elders to read */
+  .hero-dates span,.event-note,.family-label,.countdown span{font-size:12px!important}
+  .section-kicker{font-size:12px}
+  .closing-date{font-size:13px}
+  .map-link{font-size:13px}
+  footer{font-size:12px}
+  .float-button{width:44px;height:44px;padding:0;justify-content:center;font-size:0}
+  .float-button span:first-child{font-size:18px}
+  .scroll-cue .cue-text{font-size:11px;letter-spacing:1.5px}
+  .scroll-cue .cue-te{font-size:11px}
+}

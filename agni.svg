@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="12 14 176 176">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="62%">
+      <stop offset="0" stop-color="#5a1a12"/>
+      <stop offset=".6" stop-color="#3a0d12"/>
+      <stop offset="1" stop-color="#22060b"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="55%" r="45%">
+      <stop offset="0" stop-color="#ffb347" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#ffb347" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="back" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#d9481a"/>
+      <stop offset="1" stop-color="#ff9a2e"/>
+    </linearGradient>
+    <linearGradient id="mid" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#ff7a1a"/>
+      <stop offset="1" stop-color="#ffcf3f"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#fff6c8"/>
+      <stop offset="1" stop-color="#ffe17a"/>
+    </linearGradient>
+    <linearGradient id="clay" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c26a3a"/>
+      <stop offset="1" stop-color="#8a4321"/>
+    </linearGradient>
+    <linearGradient id="claySide" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9a4f28"/>
+      <stop offset="1" stop-color="#6b3418"/>
+    </linearGradient>
+    <g id="mg">
+      <circle r="3.6" fill="#ff8c1a"/><circle r="2" fill="#ffc23a"/>
+    </g>
+    <style>
+      .fl{transform-origin:100px 118px}
+      .b{animation:sway 1.8s ease-in-out infinite}
+      .m{animation:sway 1.3s ease-in-out infinite reverse}
+      .c{animation:lick 1s ease-in-out infinite}
+      .sp{animation:rise 2.2s ease-out infinite}
+      @keyframes sway{0%,100%{transform:scale(1,1) skewX(0)}50%{transform:scale(.97,1.05) skewX(-3deg)}}
+      @keyframes lick{0%,100%{transform:scale(1,1)}50%{transform:scale(1.05,.93)}}
+      @keyframes rise{0%{opacity:0;transform:translateY(0)}25%{opacity:1}100%{opacity:0;transform:translateY(-30px)}}
+    </style>
+  </defs>
+
+  <rect width="200" height="200" fill="url(#bg)"/>
+  <circle cx="100" cy="100" r="78" fill="url(#glow)"/>
+
+  <!-- layered flames (several tongues, like a real homam fire) -->
+  <path class="fl b" fill="url(#back)" opacity=".85" d="M58 118c-6-16 2-30 10-38-1 10 3 16 8 18-2-18 6-36 18-48-2 14 4 22 8 26 2-16 10-28 22-34-6 14-2 26 4 34 4-6 4-14 2-20 10 10 14 26 10 42-2 8-6 14-8 20z"/>
+  <path class="fl m" fill="url(#mid)" d="M70 118c-4-12 2-22 8-28 0 8 3 12 7 14-1-14 5-26 14-34-1 10 3 16 6 19 2-12 8-20 16-24-4 10-1 19 4 25 2-4 2-9 1-13 7 8 9 19 6 30-1 5-4 8-6 11z"/>
+  <path class="fl c" fill="url(#core)" d="M84 118c-3-8 1-15 6-19 0 6 2 9 5 10 0-10 4-17 9-21 0 7 2 11 5 14 3-4 4-8 4-11 5 6 6 14 4 21-1 3-2 5-4 6z"/>
+
+  <!-- sparks -->
+  <circle class="sp" cx="76" cy="70" r="2" fill="#ffd84a"/>
+  <circle class="sp" cx="126" cy="62" r="1.7" fill="#ffe680" style="animation-delay:.7s"/>
+  <circle class="sp" cx="110" cy="40" r="1.5" fill="#ffb12b" style="animation-delay:1.4s"/>
+
+  <!-- stepped terracotta homa kundam, three tiers -->
+  <path fill="url(#clay)" d="M64 116h72v14H64z"/>
+  <path fill="url(#claySide)" d="M64 116l-6 2v12l6 0zM136 116l6 2v12h-6z" opacity=".9"/>
+  <path fill="url(#clay)" d="M52 130h96v16H52z"/>
+  <path fill="url(#clay)" d="M40 146h120v18H40z"/>
+  <path fill="#5a2a12" d="M36 164h128l-4 6H40z"/>
+  <!-- top edge of the pit -->
+  <path fill="#3a1a0c" d="M66 116h68l-4 4H70z"/>
+
+  <!-- marigold garlands along each tier -->
+  <g>
+    <use href="#mg" x="70" y="130"/><use href="#mg" x="78" y="130"/><use href="#mg" x="86" y="130"/><use href="#mg" x="94" y="130"/>
+    <use href="#mg" x="102" y="130"/><use href="#mg" x="110" y="130"/><use href="#mg" x="118" y="130"/><use href="#mg" x="126" y="130"/>
+    <use href="#mg" x="58" y="146"/><use href="#mg" x="66" y="146"/><use href="#mg" x="74" y="146"/><use href="#mg" x="82" y="146"/>
+    <use href="#mg" x="90" y="146"/><use href="#mg" x="98" y="146"/><use href="#mg" x="106" y="146"/><use href="#mg" x="114" y="146"/>
+    <use href="#mg" x="122" y="146"/><use href="#mg" x="130" y="146"/><use href="#mg" x="138" y="146"/>
+    <use href="#mg" x="46" y="164"/><use href="#mg" x="54" y="164"/><use href="#mg" x="62" y="164"/><use href="#mg" x="70" y="164"/>
+    <use href="#mg" x="78" y="164"/><use href="#mg" x="86" y="164"/><use href="#mg" x="94" y="164"/><use href="#mg" x="102" y="164"/>
+    <use href="#mg" x="110" y="164"/><use href="#mg" x="118" y="164"/><use href="#mg" x="126" y="164"/><use href="#mg" x="134" y="164"/>
+    <use href="#mg" x="142" y="164"/><use href="#mg" x="150" y="164"/>
+  </g>
+</svg>

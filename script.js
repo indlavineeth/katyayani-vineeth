@@ -221,6 +221,14 @@ function updateBottomUi() {
 }
 addEventListener("scroll", updateBottomUi, { passive: true });
 
+// "⬇ Next" in the bottom bar: straight to the next slide (the auto-scroll then waits again)
+$("nextSlide").addEventListener("click", e => {
+  e.preventDefault();
+  const to = nextTourStop();
+  if (to !== null) window.scrollTo({ top: to, behavior: "smooth" });
+  lastTouch = Date.now();
+});
+
 document.querySelectorAll("[data-jump]").forEach(a => a.addEventListener("click", e => {
   e.preventDefault();
   $(a.dataset.jump).scrollIntoView({ behavior: "smooth", block: "start" });
